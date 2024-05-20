@@ -8,11 +8,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float movespeed = 5f;
     [SerializeField] float rotationSpeed = 500f;
 
+    [Header("Ground Check Settings")]
     [SerializeField] float groundCheckRadius = 0.2f;
     [SerializeField] Vector3 groundCheckOffset;
     [SerializeField] LayerMask groundLayer;
 
     bool isGrounded;
+
+    float yspeed;
 
 
     Quaternion targetRotation;
@@ -39,11 +42,23 @@ public class PlayerController : MonoBehaviour
         var moveDir = cameraController.PlanerRotation * moveInput;
 
         GroundCheck();
-        Debug.Log("IsGrounded = " + isGrounded);
+        if (isGrounded)
+        {
+
+            yspeed = -0.5f;
+        }
+        else 
+        {
+            yspeed += Physics.gravity.y * Time.deltaTime;        
+        }
+
+        var velocity = moveDir * movespeed;
+        velocity.y = yspeed;
+
+        characterController.Move(velocity * Time.deltaTime);
 
         if (moveAmount > 0)
         {
-            characterController.Move(moveDir * movespeed * Time.deltaTime);
             targetRotation = Quaternion.LookRotation(moveDir);
         }
 
