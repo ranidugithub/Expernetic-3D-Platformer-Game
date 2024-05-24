@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
 
     bool isGrounded;
-    bool isJumping;
     float yspeed;
 
     Quaternion targetRotation;
@@ -50,11 +49,6 @@ public class PlayerController : MonoBehaviour
             {
                 yspeed = jumpForce;
                 animator.SetTrigger("Jump");
-                isJumping = true;
-            }
-            else
-            {
-                isJumping = false;
             }
         }
         else
@@ -77,7 +71,6 @@ public class PlayerController : MonoBehaviour
 
         animator.SetFloat("moveAmount", moveAmount, 0.2f, Time.deltaTime);
         animator.SetBool("isGrounded", isGrounded);
-        animator.SetBool("isJumping", isJumping);
     }
 
     void GroundCheck()
