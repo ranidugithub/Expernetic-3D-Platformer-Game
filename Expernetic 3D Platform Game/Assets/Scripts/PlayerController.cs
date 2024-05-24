@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
     [SerializeField] float movespeed = 5f;
     [SerializeField] float rotationSpeed = 500f;
+    [SerializeField] float jumpForce = 10f;
+    [SerializeField] float gravity = -9.81f;
 
     [Header("Ground Check Settings")]
     [SerializeField] float groundCheckRadius = 0.2f;
@@ -14,9 +15,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
 
     bool isGrounded;
-
+    bool isJumping;
     float yspeed;
-
 
     Quaternion targetRotation;
 
@@ -26,10 +26,11 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-       cameraController = Camera.main.GetComponent<CameraController>();
-       animator = GetComponent<Animator>();
-       characterController = GetComponent<CharacterController>(); 
+        cameraController = Camera.main.GetComponent<CameraController>();
+        animator = GetComponent<Animator>();
+        characterController = GetComponent<CharacterController>();
     }
+
     private void Update()
     {
         float h = Input.GetAxis("Horizontal");
@@ -44,12 +45,21 @@ public class PlayerController : MonoBehaviour
         GroundCheck();
         if (isGrounded)
         {
-
             yspeed = -0.5f;
+            if (Input.GetButtonDown("Jump"))
+            {
+                yspeed = jumpForce;
+                animator.SetTrigger("Jump");
+                isJumping = true;
+            }
+            else
+            {
+                isJumping = false;
+            }
         }
-        else 
+        else
         {
-            yspeed += Physics.gravity.y * Time.deltaTime;        
+            yspeed += gravity * Time.deltaTime;
         }
 
         var velocity = moveDir * movespeed;
@@ -66,9 +76,11 @@ public class PlayerController : MonoBehaviour
             rotationSpeed * Time.deltaTime);
 
         animator.SetFloat("moveAmount", moveAmount, 0.2f, Time.deltaTime);
+        animator.SetBool("isGrounded", isGrounded);
+        animator.SetBool("isJumping", isJumping);
     }
 
-    void GroundCheck() 
+    void GroundCheck()
     {
         isGrounded = Physics.CheckSphere(transform.TransformPoint(groundCheckOffset), groundCheckRadius, groundLayer);
     }
@@ -78,5 +90,4 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = new Color(0, 1, 0, 0.5f);
         Gizmos.DrawSphere(transform.TransformPoint(groundCheckOffset), groundCheckRadius);
     }
-
 }
