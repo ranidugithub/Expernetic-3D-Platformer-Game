@@ -25,4 +25,4 @@ The game is designed to be filled with plot twists, ensuring that even if you th
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/Expernetic-3D-Platformer.git
+   git clone https://github.com/ranidugithub/Expernetic-3D-Platformer-Game
