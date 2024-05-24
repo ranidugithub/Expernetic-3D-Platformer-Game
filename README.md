@@ -18,9 +18,8 @@ The game is designed to be filled with plot twists, ensuring that even if you th
 
 ## Screenshots
 
-![Game Start](screenshots/start.png)
-![Checkpoint](screenshots/checkpoint.png)
-![Maze Path](screenshots/maze_path.png)
+![Game Start]![image](https://github.com/ranidugithub/Expernetic-3D-Platformer-Game/assets/34578972/4ee09915-89d7-4c8c-9392-75f17605fdae)
+
 
 ## Installation
 
