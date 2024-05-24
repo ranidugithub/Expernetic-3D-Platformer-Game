@@ -1,7 +1,3 @@
-# Expernetic 3D Platformer Game
-
-Welcome to the **Expernetic 3D Platformer Game**! This project is developed as part of the Research Engineer Internship assignment at Expernetic. The game is a challenging and engaging 3D platformer where players navigate through a maze filled with checkpoints, mysterious questions, and plot twists.
-
 ## Game Story
 
 In this game, the player starts in front of a maze. Upon entering the maze, the player will encounter various checkpoints. Each checkpoint presents the player with a mysterious question that requires out-of-the-box thinking to solve. Choosing the correct path allows the player to progress, while the wrong path leads to the player's demise, sending them back to the beginning of the maze.
